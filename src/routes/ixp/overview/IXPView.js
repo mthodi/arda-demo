@@ -5,7 +5,6 @@ import { Col, Row } from 'antd';
 
 import { getIXP } from 'util/Api';
 
-//import IntlMessages from "util/IntlMessages";
 // project components
 //import ChartCard from "../../../components/dash/cards/ChartCard";
 import IXPInfo from "./IXPInfo";

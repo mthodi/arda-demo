@@ -1,5 +1,7 @@
 import {FETCH_ERROR, FETCH_START, FETCH_SUCCESS, HIDE_MESSAGE, SHOW_MESSAGE} from '../../constants/ActionTypes'
 import {TOGGLE_COLLAPSED_NAV, WINDOW_WIDTH, SET_SELECTED_OPTION, SET_VIEW } from "../../constants/ActionTypes";
+import { SET_SELECTED_COUNTRY, SET_SELECTED_REGION, SET_SELECTED_IXP } from '../../constants/ActionTypes';
+
 
 const INIT_STATE = {
   error: "",
@@ -9,7 +11,10 @@ const INIT_STATE = {
   width: window.innerWidth,
   pathname: '/',
   view: '',
-  selectedOption: ''
+  selectedOption: '',
+  selectedCountry: 1,
+  selectedRegion: 1,
+  selectedIXP: 1
 };
 
 const CommonReducer = (state = INIT_STATE, action) => {
@@ -52,6 +57,12 @@ const CommonReducer = (state = INIT_STATE, action) => {
         return { ...state, view: action.payload};
     case SET_SELECTED_OPTION:
         return { ...state, selectedOption: action.payload};
+    case SET_SELECTED_IXP:
+        return { ...state, selectedIXP: action.payload};
+    case SET_SELECTED_COUNTRY:
+        return { ...state, selectedCountry: action.payload};
+    case SET_SELECTED_REGION:
+        return { ...state, selectedRegion: action.payload};
     default:
       return state;
   }

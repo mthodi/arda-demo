@@ -1,6 +1,8 @@
 import {FETCH_ERROR, FETCH_START, FETCH_SUCCESS, HIDE_MESSAGE, SHOW_MESSAGE, SET_VIEW, SET_SELECTED_OPTION} 
 from "../../constants/ActionTypes";
 
+import { SET_SELECTED_COUNTRY, SET_SELECTED_IXP, SET_SELECTED_REGION } from "../../constants/ActionTypes";
+
 export const fetchStart = () => {
   return {
     type: FETCH_START
@@ -41,6 +43,16 @@ export function setSelectedOption(option) {
   return { type: SET_SELECTED_OPTION, payload: option };
 }
 
+export function setSelectedIXP(ixp) {
+  return { type: SET_SELECTED_IXP, payload: ixp };
+}
 
+export function setSelectedCountry(country) {
+  return { type: SET_SELECTED_COUNTRY, payload: country };
+}
+
+export function setSelectedRegion(region) {
+  return { type: SET_SELECTED_REGION, payload: region };
+}
 
 

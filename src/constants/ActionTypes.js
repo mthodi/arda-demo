@@ -31,6 +31,9 @@ export const INIT_URL = 'INIT_URL';
 export const USER_DATA = 'user_data';
 export const USER_TOKEN_SET = 'user_token_set';
 
-//Search bar selector constants
+//App specific actions
 export const SET_VIEW = 'SET_VIEW';
 export const SET_SELECTED_OPTION = 'SET_SELECTED_OPTION';
+export const SET_SELECTED_IXP = 'SET_SELECTED_IXP';
+export const SET_SELECTED_COUNTRY = 'SET_SELECTED_COUNTRY';
+export const SET_SELECTED_REGION = 'SET_SELECTED_REGION';

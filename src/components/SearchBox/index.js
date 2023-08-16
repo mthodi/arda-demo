@@ -1,33 +1,83 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 import { Select } from 'antd';
-import { setView, setSelectedOption } from '../../appRedux/actions';
+import { setView, setSelectedOption, setSelectedCountry } from '../../appRedux/actions';
+import { setSelectedIXP, setSelectedRegion } from '../../appRedux/actions/Common';
 
 //API imports
 import { useIXPs, useCountryList, useRegions } from '../../util/Api';
 
 const { Option } = Select;
 
-
-
-
-
 const SearchBox = ({ styleName, placeholder, onChange, value }) => {
-
-
   const dispatch = useDispatch();
   const view = useSelector(({ common }) => common.view);
   const selectedOption = useSelector(({ common }) => common.selectedOption);
+  //const pathname = useSelector(({ common }) => common.pathname);
+  const selectedIXP = useSelector(({ common }) => common.selectedIXP);
+  const selectedCountry = useSelector(({ common }) => common.selectedCountry);
+  const selectedRegion = useSelector(({ common }) => common.selectedRegion);
+
+
+  const location = useLocation();
 
   const handleViewChange = (value) => {
     dispatch(setView(value));
     dispatch(setSelectedOption(1));
-    // console.log(value);
   };
+
+  // set view based on pathname
+  useEffect(() => {
+    setViewFromPathname(location.pathname, view, dispatch);
+  }, [location.pathname, view, dispatch]);
+
+  //function to set view based on pathname
+  const setViewFromPathname = (pathname) => {
+    const arr = pathname.split('/');
+    switch (arr[1]) {
+      case 'ixp':
+        if (view !== 'IXP') {
+          dispatch(setView('IXP'));
+          dispatch(setSelectedOption(selectedIXP));
+        }
+        break;
+      case 'country':
+        if (view !== 'Country') {
+          dispatch(setView('Country'));
+          dispatch(setSelectedOption(selectedCountry));
+        }
+        break;
+      case 'region':
+        if (view !== 'Region') {
+          dispatch(setView('Region'));
+          dispatch(setSelectedOption(selectedRegion));
+        }
+        break;
+      default: 
+        {
+          dispatch(setView(''));
+          dispatch(setSelectedOption(''));
+        }
+        
+    }}
 
   const handleOptionChange = (value) => {
     dispatch(setSelectedOption(value));
+    switch (view) {
+      case 'IXP':
+        dispatch(setSelectedIXP(value));
+        console.log(value);
+        break;
+      case 'Country':
+        dispatch(setSelectedCountry(value));
+        break;
+      case 'Region':
+        dispatch(setSelectedRegion(value));
+        break;
+      default:
+        break;
+    }
   };
 
   const getViewOptions = () => {
@@ -46,13 +96,13 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
   const getPlaceholder = () => {
     switch (view) {
       case 'IXP':
-        return 'Search IXP';
+        return 'Select an IXP';
       case 'Country':
-        return 'Search Country';
+        return 'Select a Country';
       case 'Region':
-        return 'Search Region';
+        return 'Select a Region';
       default:
-        return 'Search..';
+        return '';
     }
   }
   const placeHolder = getPlaceholder();
@@ -65,11 +115,12 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
   return (
 
     <div style={{ maxWidth: 500, display: 'flex', alignItems: 'center' }}>
-      <Select value={view} onChange={handleViewChange}>
+      {/* <Select value={view} onChange={handleViewChange}>
         <Option value="IXP">IXP View</Option>
         <Option value="Country">Country View</Option>
         <Option value="Region">Region View</Option>
-      </Select>
+      </Select> */}
+      <span style={{ marginLeft: 3, marginRight: 8 }}> {placeHolder}: </span>
       <Select
         value={selectedOption}
         onChange={handleOptionChange}
@@ -79,7 +130,7 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }>
-
+        {/* if view is IXP use option.long_name*/}
         {getViewOptions().map((option) => (
           <Option key={option.id} value={option.id}>
             {option.name}
