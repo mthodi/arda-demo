@@ -7,7 +7,10 @@ import { getIXP } from 'util/Api';
 
 // project components
 //import ChartCard from "../../../components/dash/cards/ChartCard";
+//import GrowthCard from "../../../components/Metrics/GrowthCard";
+import IconWithTextCard from "../../../components/Metrics/IconWithTextCard";
 import IXPInfo from "./IXPInfo";
+import MemberChart from "./IXPMemberChart";
 
 export default function IXPDashboard ({ ixpId }){
   const ixpQuery = useQuery({
@@ -32,10 +35,14 @@ export default function IXPDashboard ({ ixpId }){
         <Col span={24}><IXPInfo ixpData={ixpQuery.data}/></Col>
       </Row>
       <Row>
-        <Col span={6}>Col 4</Col>
-        <Col span={6}>Col 4</Col>
-        <Col span={6}>Col 4</Col>
-        <Col span={6}>Col 4</Col>
+        <Col span={6}><IconWithTextCard subTitle="Total Visible ASNs" title={3456}/></Col>
+        <Col span={6}><IconWithTextCard subTitle="Total Visible Prefixes" title={3459}  /></Col>
+        <Col span={6}><IconWithTextCard subTitle="Average AS Path Length" title={3456} /></Col>
+        <Col span={6}><IconWithTextCard subTitle="Visible Vs. Allocated ASNs" title={3456} /></Col>
+      </Row>
+      <Row>
+        <Col span={12}><MemberChart /></Col>
+        <Col span={12}><MemberChart /></Col>
       </Row>
     </>
   );

@@ -1,4 +1,4 @@
-import { Typography, Row, Col } from 'antd';
+import { Typography } from 'antd';
 
 const { Title, Text } = Typography;
 
@@ -18,7 +18,7 @@ const IXPInfo = ({ ixpData }) => {
           City: {ixpData.city}
         </Text>
         <Text style={{ display: 'block', textAlign: 'center', marginBottom: 8}}>
-          Website: <a href={ixpData.website} target="_blank" rel="noopener">{ixpData.website}</a>
+          Website: <a href={ixpData.website} target="_blank" rel="noreferrer">{ixpData.website}</a>
         </Text>
     </div>
   );
