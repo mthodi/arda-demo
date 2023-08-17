@@ -1,13 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Col, Row } from 'antd';
 
 import { getIXP } from 'util/Api';
+import SortableTable from 'components/dash/SortableTable';
 
 // project components
-//import ChartCard from "../../../components/dash/cards/ChartCard";
-//import GrowthCard from "../../../components/Metrics/GrowthCard";
 import IconWithTextCard from "../../../components/Metrics/IconWithTextCard";
 import IXPInfo from "./IXPInfo";
 import MemberChart from "./IXPMemberChart";
@@ -20,14 +18,14 @@ export default function IXPDashboard ({ ixpId }){
   });
 
   if (ixpQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading IXP Info...</div>;
   }
   if (ixpQuery.isError) {
     return <div>Error fetching IXP Infomation </div>;
   }
-  if (ixpQuery.data) {
-    console.log(ixpQuery.data);
-  }
+  // if (ixpQuery.data) {
+  //   console.log(ixpQuery.data);
+  // }
 
   return (
     <>
@@ -43,6 +41,12 @@ export default function IXPDashboard ({ ixpId }){
       <Row>
         <Col span={12}><MemberChart /></Col>
         <Col span={12}><MemberChart /></Col>
+      </Row>
+      <Row>
+        <Col span={12}><h2>Members at JINX </h2></Col>
+      </Row>
+      <Row>
+        <Col span={24}><SortableTable /></Col>
       </Row>
     </>
   );

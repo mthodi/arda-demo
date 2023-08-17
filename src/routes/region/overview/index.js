@@ -1,17 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Col, Row } from 'antd';
 
-//import IntlMessages from "util/IntlMessages";
+import RegionView from "./RegionView";
 
 const RegionOverview = () => {
+
+  const selectedRegion = useSelector(({ common }) => common.selectedRegion);
   return (
-    <div>
-      <h2 className="title gx-mb-4">Region Overview</h2>
-
-      <div className="gx-d-flex justify-content-center">
-        <h4>Start building your app. Happy Coding!</h4>
-      </div>
-
-    </div>
+    <>
+      <Row>
+        <Col span={24}>
+          <RegionView regionId={selectedRegion} />
+        </Col>
+      </Row>
+    </>
   );
 };
 

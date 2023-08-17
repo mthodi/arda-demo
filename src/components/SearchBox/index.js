@@ -115,11 +115,6 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
   return (
 
     <div style={{ maxWidth: 500, display: 'flex', alignItems: 'center' }}>
-      {/* <Select value={view} onChange={handleViewChange}>
-        <Option value="IXP">IXP View</Option>
-        <Option value="Country">Country View</Option>
-        <Option value="Region">Region View</Option>
-      </Select> */}
       <span style={{ marginLeft: 3, marginRight: 8 }}> {placeHolder}: </span>
       <Select
         value={selectedOption}

@@ -1,17 +1,19 @@
 import React from "react";
 
-//import IntlMessages from "util/IntlMessages";
+import { Col, Row } from 'antd';
+import { useSelector } from 'react-redux';
+import RegionASView from "./RegionASView";
+
 
 const RegionASNRelations = () => {
+
+  const selectedRegion = useSelector(({ common }) => common.selectedRegion);
   return (
-    <div>
-      <h2 className="title gx-mb-4">AS Relations in Region</h2>
-
-      <div className="gx-d-flex justify-content-center">
-        <h4>Start building your app. Happy Coding!</h4>
-      </div>
-
-    </div>
+    <>
+      <Row>
+        <Col span={24}> <RegionASView regionId={selectedRegion} /></Col>
+      </Row>
+    </>
   );
 };
 

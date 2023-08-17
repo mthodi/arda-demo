@@ -1,18 +1,23 @@
 
 import React from "react";
 
-//import IntlMessages from "util/IntlMessages";
+import { Col, Row } from 'antd';
+import { useSelector } from 'react-redux';
+import CountryView from "./CountryView";
+
 
 const CountryOverview = () => {
+
+  const selectedCountry = useSelector(({ common }) => common.selectedCountry);
+  
   return (
-    <div>
-      <h2 className="title gx-mb-4">Country Overview</h2>
-
-      <div className="gx-d-flex justify-content-center">
-        <h4>Start building your app. Happy Coding!</h4>
-      </div>
-
-    </div>
+    <>
+      <Row>
+        <Col span={24}>
+          <CountryView countryId={selectedCountry} />
+        </Col>
+      </Row>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
 
 export default axios.create({
-  baseURL: "http://g-axon.work/jwtauth/api",
+  baseURL: "http://127.0.0.1:80",
   headers: {
     'Content-Type': 'application/json',
   }
