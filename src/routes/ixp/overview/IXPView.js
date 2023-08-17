@@ -2,11 +2,12 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Col, Row, Typography } from 'antd';
 import { getIXP, useGetIXP_ASN_Stats, useGetIXP_IPv4_Stats } from 'util/Api';
+import { useGetIXPMemberDist } from 'util/Api';
 
 // project components
 import IconWithTextCard from "components/Metrics/IconWithTextCard";
 import IXPInfo from "./IXPInfo";
-import MemberChart from "./IXPMemberChart";
+import { MemberCountryChart, MemberTypeChart } from "./IXPMemberChart";
 import IXPMemberTable from "./IXPMemberTable";
 
 const { Title } = Typography;
@@ -20,6 +21,7 @@ export default function IXPDashboard({ ixpId }) {
 
   const { data: ixpASNStats } = useGetIXP_ASN_Stats(ixpId);
   const { data: ixpIPv4Stats } = useGetIXP_IPv4_Stats(ixpId);
+  const { data: memberDist } = useGetIXPMemberDist(ixpId);
 
 
   if (ixpQuery.isLoading) {
@@ -31,6 +33,8 @@ export default function IXPDashboard({ ixpId }) {
 
   if (ixpASNStats) console.log(ixpASNStats);
   if (ixpIPv4Stats) { console.log(ixpIPv4Stats); }
+
+  if (memberDist) { console.log(memberDist); }
 
   return (
     <>
@@ -44,8 +48,8 @@ export default function IXPDashboard({ ixpId }) {
         <Col span={6}><IconWithTextCard subTitle="Visible Vs. Allocated ASNs" title={ixpASNStats.allocated_vs_visible_percentage} /></Col>
       </Row>
       <Row>
-        <Col span={12}><MemberChart /></Col>
-        <Col span={12}><MemberChart /></Col>
+        <Col span={12}><MemberCountryChart data={memberDist.countries} /></Col>
+        <Col span={12}><MemberTypeChart data={memberDist.types} /></Col>
       </Row>
       <Row>
         <Col span={24}>
