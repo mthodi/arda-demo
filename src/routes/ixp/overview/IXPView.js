@@ -1,21 +1,26 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Col, Row } from 'antd';
-
-import { getIXP } from 'util/Api';
-import SortableTable from 'components/dash/SortableTable';
+import { Col, Row, Typography } from 'antd';
+import { getIXP, useGetIXP_ASN_Stats, useGetIXP_IPv4_Stats } from 'util/Api';
 
 // project components
-import IconWithTextCard from "../../../components/Metrics/IconWithTextCard";
+import IconWithTextCard from "components/Metrics/IconWithTextCard";
 import IXPInfo from "./IXPInfo";
 import MemberChart from "./IXPMemberChart";
+import IXPMemberTable from "./IXPMemberTable";
 
-export default function IXPDashboard ({ ixpId }){
+const { Title } = Typography;
+
+export default function IXPDashboard({ ixpId }) {
   const ixpQuery = useQuery({
     queryKey: ['ixp', ixpId],
     queryFn: () => getIXP(ixpId),
     enabled: !!ixpId
   });
+
+  const { data: ixpASNStats } = useGetIXP_ASN_Stats(ixpId);
+  const { data: ixpIPv4Stats } = useGetIXP_IPv4_Stats(ixpId);
+
 
   if (ixpQuery.isLoading) {
     return <div>Loading IXP Info...</div>;
@@ -23,30 +28,34 @@ export default function IXPDashboard ({ ixpId }){
   if (ixpQuery.isError) {
     return <div>Error fetching IXP Infomation </div>;
   }
-  // if (ixpQuery.data) {
-  //   console.log(ixpQuery.data);
-  // }
+
+  if (ixpASNStats) console.log(ixpASNStats);
+  if (ixpIPv4Stats) { console.log(ixpIPv4Stats); }
 
   return (
     <>
       <Row>
-        <Col span={24}><IXPInfo ixpData={ixpQuery.data}/></Col>
+        <Col span={24}><IXPInfo ixpData={ixpQuery.data} /></Col>
       </Row>
       <Row>
-        <Col span={6}><IconWithTextCard subTitle="Total Visible ASNs" title={3456}/></Col>
-        <Col span={6}><IconWithTextCard subTitle="Total Visible Prefixes" title={3459}  /></Col>
-        <Col span={6}><IconWithTextCard subTitle="Average AS Path Length" title={3456} /></Col>
-        <Col span={6}><IconWithTextCard subTitle="Visible Vs. Allocated ASNs" title={3456} /></Col>
+        <Col span={6}><IconWithTextCard subTitle="Total Visible ASNs" title={ixpASNStats.visible_as_numbers} /></Col>
+        <Col span={6}><IconWithTextCard subTitle="Total Visible Prefixes" title={ixpIPv4Stats.visible_prefixes} /></Col>
+        <Col span={6}><IconWithTextCard subTitle="Average AS Path Length" title={ixpASNStats.average_as_path_length} /></Col>
+        <Col span={6}><IconWithTextCard subTitle="Visible Vs. Allocated ASNs" title={ixpASNStats.allocated_vs_visible_percentage} /></Col>
       </Row>
       <Row>
         <Col span={12}><MemberChart /></Col>
         <Col span={12}><MemberChart /></Col>
       </Row>
       <Row>
-        <Col span={12}><h2>Members at JINX </h2></Col>
+        <Col span={24}>
+          <Title level={4} style={{ textAlign: 'center', marginBottom: 10, marginTop: 10 }}>
+            Members at {ixpQuery.data.name}
+          </Title>
+        </Col>
       </Row>
       <Row>
-        <Col span={24}><SortableTable /></Col>
+        <Col span={24}><IXPMemberTable data={ixpQuery.data.members} /></Col>
       </Row>
     </>
   );
