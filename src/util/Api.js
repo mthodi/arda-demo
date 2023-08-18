@@ -55,6 +55,12 @@ export function getIXP_IPv4_Stats(id) {
   }).then((response) => response.data);
 }
 
+export function getIXPGrowth(id) {
+  return axios.get(`${baseURL}/api/ixp/growth/`, {
+    params: { ixp_id: id }
+  }).then((response) => response.data);
+}
+
 //================Country API CALLS ====================
 
 export function getCountryList() {
@@ -101,4 +107,8 @@ export function useGetIXP_IPv4_Stats(id) {
 
 export function useGetIXPMemberDist(id) {
   return useQuery(['ixp', id, 'memberDist'], () => getIXPMemberDist(id));
+}
+
+export function useGetIXPGrowth(id) {
+  return useQuery(['ixp', id, 'growth'], () => getIXPGrowth(id));
 }

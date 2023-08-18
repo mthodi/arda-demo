@@ -14,7 +14,6 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
   const dispatch = useDispatch();
   const view = useSelector(({ common }) => common.view);
   const selectedOption = useSelector(({ common }) => common.selectedOption);
-  //const pathname = useSelector(({ common }) => common.pathname);
   const selectedIXP = useSelector(({ common }) => common.selectedIXP);
   const selectedCountry = useSelector(({ common }) => common.selectedCountry);
   const selectedRegion = useSelector(({ common }) => common.selectedRegion);
@@ -110,6 +109,11 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
   const { data: ixpList } = useIXPs();
   const { data: countryList } = useCountryList();
   const { data: regionList } = useRegions();
+
+  // wait for all queries to resolve
+  if (!ixpList || !countryList || !regionList) {
+    return <div>Loading...</div>;
+  }
 
 
   return (

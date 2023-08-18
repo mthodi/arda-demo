@@ -17,7 +17,8 @@ const IXPOverview = () => {
     <>
       <Row>
         <Col span={24}>
-          <IXPView ixpId={selectedIXP} /> </Col>
+          <IXPView ixpId={selectedIXP} />
+        </Col>
       </Row>
     </>
   )

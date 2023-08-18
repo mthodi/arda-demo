@@ -1,16 +1,7 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-//import { useTheme } from '@mui/material/styles';
-
 export const MemberCountryChart = ({ data }) => {
-  // const data = [
-  //   { country: 'United States', percentage: 35.714285714285715 },
-  //   { country: 'Angola', percentage: 35.714285714285715 },
-  //   { country: 'Malawi', percentage: 14.285714285714285 },
-  //   { country: 'Czech Republic', percentage: 7.14 },
-  //   { country: 'Namibia', percentage: 7.14 }
-  // ];
 
   const chartData = {
     series: data.map((item) => item.percentage),
@@ -35,7 +26,6 @@ export const MemberCountryChart = ({ data }) => {
       ]
     }
   };
-
   return <ReactApexChart options={chartData.options} series={chartData.series} type="donut" height="330" />;
 };
 
@@ -61,8 +51,22 @@ export const MemberTypeChart = ({ data }) => {
             }
           }
         }
-      ]
-    }
+      ],
+      // title: {
+      //   text: 'AS Type Distribution',
+      //   align: 'center',
+      //   offsetX: 0,
+      //   offsetY: 0,
+      //   floating: false,
+      //   style: {
+      //     align: 'center',
+      //     fontSize: '16px',
+      //     fontWeight: 'bold',
+      //     fontFamily: undefined,
+      //     color: '#263238'
+      //   },
+      // }
+    },
   };
 
   return <ReactApexChart options={chartData.options} series={chartData.series} type="donut" height="330" />;
