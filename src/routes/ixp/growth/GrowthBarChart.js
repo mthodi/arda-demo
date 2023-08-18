@@ -160,5 +160,4 @@ export const MemberGrowthBarChart = ({ data }) => {
         }
     };
     return <ReactApexChart options={chartData.options} series={chartData.series} type="bar" height="350" />;
-
 };

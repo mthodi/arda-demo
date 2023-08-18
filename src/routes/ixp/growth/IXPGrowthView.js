@@ -3,8 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Col, Row } from "antd";
 import { Typography } from 'antd';
 import { CapacityGrowthBarChart, MemberGrowthBarChart } from "./GrowthBarChart";
-import AreaChart from "./VisibleResourceChart";
+import { ASNTrendChart, IPv4TrendChart } from "./VisibleResourceChart";
 import { useGetIXPGrowth, getIXP } from "util/Api";
+import { useGetVisibleASNTrends, useGetVisiblePrefixesTrends } from "../../../util/Api";
 
 const { Title } = Typography;
 
@@ -17,13 +18,13 @@ export default function IXPGrowthView({ ixpId }) {
     });
 
     const { data: ixpGrowthData } = useGetIXPGrowth(ixpId);
+    const { data: visibleASNs } = useGetVisibleASNTrends(ixpId);
+    const { data: visiblePrefixes } = useGetVisiblePrefixesTrends(ixpId);
 
     // wait for all queries to resolve
-    if (ixpQuery.isLoading || !ixpGrowthData) {
+    if (ixpQuery.isLoading || !ixpGrowthData || !visibleASNs || !visiblePrefixes) {
         return <div>Loading IXP Info...</div>;
     }
-
-
 
     const sampleData = [
         { reporting_date: '2020-01-01', count: 100 },
@@ -48,8 +49,8 @@ export default function IXPGrowthView({ ixpId }) {
                 <Col span={12}><CapacityGrowthBarChart data={ixpGrowthData.capacity} /></Col>
             </Row>
             <Row>
-                <Col span={12}><AreaChart data={sampleData} /></Col>
-                <Col span={12}><AreaChart data={sampleData} /></Col>
+                <Col span={12}><ASNTrendChart data={visibleASNs.as_numbers} /></Col>
+                <Col span={12}><IPv4TrendChart data={visiblePrefixes.prefixes} /></Col>
             </Row>
         </div>
     );

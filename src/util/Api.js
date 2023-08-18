@@ -61,6 +61,18 @@ export function getIXPGrowth(id) {
   }).then((response) => response.data);
 }
 
+export function getVisibleASNTrends(id) {
+  return axios.get(`${baseURL}/api/stats/ixp/asn/trend/`, {
+    params: { ixp_id: id }
+  }).then((response) => response.data);
+}
+
+export function getVisiblePrefixTrends(id) {
+  return axios.get(`${baseURL}/api/stats/ixp/ipv4/trend/`, {
+    params: { ixp_id: id }
+  }).then((response) => response.data);
+}
+
 //================Country API CALLS ====================
 
 export function getCountryList() {
@@ -111,4 +123,12 @@ export function useGetIXPMemberDist(id) {
 
 export function useGetIXPGrowth(id) {
   return useQuery(['ixp', id, 'growth'], () => getIXPGrowth(id));
+}
+
+export function useGetVisibleASNTrends(id){
+  return useQuery(['ixp', id, 'asn-trends'], () => getVisibleASNTrends(id));
+}
+
+export function useGetVisiblePrefixesTrends(id){
+  return useQuery(['ixp', id, 'ipv4-trends'], () => getVisiblePrefixTrends(id))
 }
