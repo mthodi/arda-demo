@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Col, Row, Typography } from 'antd';
 
-import { getCountry } from 'util/Api';
-import IconWithTextCard from "../../../components/Metrics/IconWithTextCard";
-import SortableTable from 'components/dash/SortableTable';
+import { getCountry, useGetCountryOverviewStats, useGetCountryASNs } from 'util/Api';
+import IconWithTextCard from "components/Metrics/IconWithTextCard";
+import CountryASNTable from "./CountryASNTable";
 
 
 const { Title, Text } = Typography;
@@ -16,13 +16,14 @@ export default function CountryView({ countryId }) {
         enabled: !!countryId
     });
 
-    if (countryQuery.isLoading) return "Loading country info...";
-    if (countryQuery.isError) return "An error has occurred while loading country info. Reload to try again.";
-    //if (countryQuery.data.results.length === 0) return "No country found";
-    if (countryQuery.data) {
-        console.log(countryQuery.data);
-    }
+    const { data: countryOverview } = useGetCountryOverviewStats(countryId);
+    const { data: countryASNs } = useGetCountryASNs(countryId);
 
+    // wait for all queries to resolve
+    if (countryQuery.isLoading || !countryOverview || !countryASNs) {
+        return <div>Loading Country Info...</div>;
+    }
+    console.log(countryASNs);
     return (
         <>
             <Row>
@@ -36,19 +37,19 @@ export default function CountryView({ countryId }) {
                 </Col>
             </Row>
             <Row>
-                <Col span={8}><IconWithTextCard subTitle="Number of IXPs" title={3456} /></Col>
-                <Col span={8}><IconWithTextCard subTitle="Visible vs. Allocated ASNs" title={3459} /></Col>
-                <Col span={8}><IconWithTextCard subTitle="Local vs. Foreign ASNs" title={3456} /></Col>
+                <Col span={8}><IconWithTextCard subTitle="Number of IXPs" title={countryOverview.ixp_count} /></Col>
+                <Col span={8}><IconWithTextCard subTitle="ASNs Present at IXP Vs. Allocated ASNs" title={countryOverview.present_vs_allocated} /></Col>
+                <Col span={8}><IconWithTextCard subTitle="Local Vs. Foreign ASNs at Present at IXPs" title={countryOverview.local_vs_foreign} /></Col>
             </Row>
             <Row>
                 <Col span={24}>
-                <Title level={4} style={{ textAlign: 'center', marginBottom: 2 }}>
+                <Title level={4} style={{ textAlign: 'center', marginBottom: 10 }}>
                        AS Numbers in {countryQuery.data.name}
                     </Title>
                 </Col>
             </Row>
             <Row>
-                <Col span={24}><SortableTable /></Col>
+                <Col span={24}><CountryASNTable data={countryASNs}/></Col>
             </Row>
         </>
     );

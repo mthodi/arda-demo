@@ -12,7 +12,7 @@ const INIT_STATE = {
   pathname: '/',
   view: '',
   selectedOption: '',
-  selectedCountry: 1,
+  selectedCountry: 7,
   selectedRegion: 1,
   selectedIXP: 1
 };

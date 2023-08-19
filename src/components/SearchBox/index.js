@@ -7,7 +7,6 @@ import { setSelectedIXP, setSelectedRegion } from '../../appRedux/actions/Common
 
 //API imports
 import { useIXPs, useCountryList, useRegions } from '../../util/Api';
-
 const { Option } = Select;
 
 const SearchBox = ({ styleName, placeholder, onChange, value }) => {

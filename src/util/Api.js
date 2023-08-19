@@ -83,6 +83,20 @@ export function getCountry(id) {
   return axios.get(`${baseURL}/api/country/${id}`).then((response) => response.data);
 }
 
+export function getCountryOverviewStats(id) {
+  return axios.get(`${baseURL}/api/country/stats/overview/`, {
+    params: { country_id: id }
+  }).then((response) => response.data);
+}
+
+export function getCountryASNs(id) {
+  return axios.get(`${baseURL}/api/country/asns/`, {
+    params: { country_id: id }
+  }).then((response) => response.data);
+}
+
+//================Region API CALLS ====================
+
 export function regions() {
   return axios.get(`${baseURL}/api/`).then((response) => response.data);
 }
@@ -98,10 +112,6 @@ export function useIXPs() {
 
 export function useIXP(id) {
   return useQuery(['ixp', id], () => getIXP(id));
-}
-
-export function useCountryList () {
-  return useQuery(['countries'], getCountryList);
 }
 
 //region list
@@ -131,4 +141,21 @@ export function useGetVisibleASNTrends(id){
 
 export function useGetVisiblePrefixesTrends(id){
   return useQuery(['ixp', id, 'ipv4-trends'], () => getVisiblePrefixTrends(id))
+}
+
+//================Country API Hooks ====================
+export function useCountryList () {
+  return useQuery(['countries'], getCountryList);
+}
+
+export function useGetCountry(id) {
+  return useQuery(['country', id], () => getCountry(id));
+}
+
+export function useGetCountryOverviewStats(id) {
+  return useQuery(['country', id, 'overview'], () => getCountryOverviewStats(id));
+}
+
+export function useGetCountryASNs(id) {
+  return useQuery(['country', id, 'asns'], () => getCountryASNs(id));
 }

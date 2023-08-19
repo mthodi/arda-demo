@@ -26,15 +26,6 @@ export default function IXPGrowthView({ ixpId }) {
         return <div>Loading IXP Info...</div>;
     }
 
-    const sampleData = [
-        { reporting_date: '2020-01-01', count: 100 },
-        { reporting_date: '2020-01-02', count: 200 },
-        { reporting_date: '2020-01-03', count: 300 },
-        { reporting_date: '2020-01-04', count: 400 },
-        { reporting_date: '2020-01-05', count: 500 },
-        { reporting_date: '2020-01-06', count: 600 },
-
-    ];
     return (
         <div>
             <Row>
