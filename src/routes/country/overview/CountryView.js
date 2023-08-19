@@ -28,18 +28,18 @@ export default function CountryView({ countryId }) {
         <>
             <Row>
                 <Col span={24}>
-                    <Title level={2} style={{ textAlign: 'center', marginBottom: 1 }}>
+                    <Title level={2} style={{ textAlign: 'center', marginBottom: 2 }}>
                         {countryQuery.data.name}
                     </Title>
                     <Text strong style={{ display: 'block', textAlign: 'center', marginBottom: 10 }}>
-                        Internet Region: {countryQuery.data.region}
+                        Internet Region: {countryQuery.data.region_name}
                     </Text>
                 </Col>
             </Row>
             <Row>
                 <Col span={8}><IconWithTextCard subTitle="Number of IXPs" title={countryOverview.ixp_count} /></Col>
-                <Col span={8}><IconWithTextCard subTitle="ASNs Present at IXP Vs. Allocated ASNs" title={countryOverview.present_vs_allocated} /></Col>
-                <Col span={8}><IconWithTextCard subTitle="Local Vs. Foreign ASNs at Present at IXPs" title={countryOverview.local_vs_foreign} /></Col>
+                <Col span={8}><IconWithTextCard subTitle="ASNs Present at IXP Vs. Allocated ASNs" title={`${countryOverview.present_vs_allocated}%`} /></Col>
+                <Col span={8}><IconWithTextCard subTitle="Local Vs Foreign ASNs at Present at IXPs" title={ `${countryOverview.local_vs_foreign}%`} /></Col>
             </Row>
             <Row>
                 <Col span={24}>

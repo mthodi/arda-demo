@@ -105,6 +105,18 @@ export function getRegion(id) {
   return axios.get(`${baseURL}/api/region/${id}`).then((response) => response.data);
 }
 
+export function getRegionOverviewStats(id) {
+  return axios.get(`${baseURL}/api/region/stats/overview/`, {
+    params: { region_id: id }
+  }).then((response) => response.data);
+}
+
+export function getRegionASNs(id) {
+  return axios.get(`${baseURL}/api/region/asns/`, {
+    params: { region_id: id }
+  }).then((response) => response.data);
+}
+
 // ================= React Qeury hooks ==============================
 export function useIXPs() {
   return useQuery(['ixps'], getIXPs);
@@ -112,11 +124,6 @@ export function useIXPs() {
 
 export function useIXP(id) {
   return useQuery(['ixp', id], () => getIXP(id));
-}
-
-//region list
-export function useRegions() {
-  return useQuery(['regions'], regions);
 }
 
 export function useGetIXP_ASN_Stats(id) {
@@ -158,4 +165,23 @@ export function useGetCountryOverviewStats(id) {
 
 export function useGetCountryASNs(id) {
   return useQuery(['country', id, 'asns'], () => getCountryASNs(id));
+}
+
+
+//================Region API Hooks ====================
+//region list
+export function useRegions() {
+  return useQuery(['regions'], regions);
+}
+
+export function useGetRegion(id) {
+  return useQuery(['region', id], () => getRegion(id));
+}
+
+export function useGetRegionOverviewStats(id) {
+  return useQuery(['region', id, 'overview'], () => getRegionOverviewStats(id));
+}
+
+export function useGetRegionASNs(id) {
+  return useQuery(['region', id, 'asns'], () => getRegionASNs(id));
 }

@@ -13,23 +13,10 @@ const DataTable = ({ data }) => {
 
   const expandedRowRender = record => {
     // check if ix_presence is empty
-    var localIXPresence = "";
-    var ixPresenceText = "";
-    if (record.ix_presence.length === 0 && record.external_ix_presence_count === 0) {
+    if (record.ix_presence.length === 0) {
         return <p>{record.as_name} is not present at any IXPs in Africa.</p>;
-    }else if (record.ix_presence.length === 0 && record.external_ix_presence_count !== 0) {
-        return <p>{record.as_name} is not present at any IXPs in the country.
-        Present at {record.external_ix_presence.join(', ')}.
-        </p>;
-    }else if (record.ix_presence.length !== 0 && record.external_ix_presence_count === 0) {
-        return <p>{record.as_name} is present at {record.ix_presence.join(', ')}.
-        Not present at any other IXP in Africa.
-        </p>;
-    }
-    else{
-        return <p>{record.as_name} is present at {record.ix_presence.join(', ')}.
-        Present at {record.external_ix_presence.join(', ')}.
-        </p>;
+    } else{
+        return <p>{record.as_name} is present at {record.ix_presence.join(', ')}.</p>;
     }
   };
 
@@ -53,32 +40,31 @@ const DataTable = ({ data }) => {
       },
     },
     {
+      title: 'Registration Country',
+      dataIndex: 'registration_country',
+      sorter: {
+        compare: (a, b) => a.registration_country.localeCompare(b.registration_country),
+        multiple: 3,
+      },
+    },
+    {
       title: 'AS Type',
       dataIndex: 'as_type',
       key: 'as_type',
         sorter: {
             compare: (a, b) => a.as_type.localeCompare(b.as_type),
-            multiple: 3,
-        },
-    },
-    {
-        title: 'Presence at Local IXPs',
-        dataIndex: 'ix_presence_count',
-        key: 'ix_presence_count',
-        sorter: {
-            compare: (a, b) => a.ix_presence_count - b.ix_presence_count,
             multiple: 4,
         },
     },
     {
-        title: 'Presence at External IXPs',
-        dataIndex: 'external_ix_presence_count',
-        key: 'external_ix_presence_count',
+        title: 'Presence at African IXPs',
+        dataIndex: 'ix_presence_count',
+        key: 'ix_presence_count',
         sorter: {
-            compare: (a, b) => a.external_ix_presence_count - b.external_ix_presence_count,
+            compare: (a, b) => a.ix_presence_count - b.ix_presence_count,
             multiple: 5,
         },
-    }
+    },
   ];
 
   return (
