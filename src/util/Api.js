@@ -2,16 +2,16 @@ import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
 
 export default axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: "https://arda-demo.the-maravian.com",
   headers: {
     'Content-Type': 'application/json',
   }
 });
 
-const baseURL = "http://127.0.0.1:8000";
+const baseURL = "https://arda-demo.the-maravian.com";
 
 export function getASNumbers() {
-  return axios.get('http://127.0.0.1:8000/api/asn/').then((response) => response.data);
+  return axios.get('https://arda-demo.the-maravian.com/api/asn/').then((response) => response.data);
 }
 
 export function getAsnByCountry(country) {
