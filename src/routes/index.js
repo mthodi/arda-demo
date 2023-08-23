@@ -12,7 +12,7 @@ const App = ({match}) => {
   return (
   <div className="gx-main-content-wrapper">
     <Switch>
-      <Route path={`${match.url}sample`} component={asyncComponent(() => import('./SamplePage'))} />
+      <Route path={`${match.url}home`} component={asyncComponent(() => import('./HomePage'))} />
       <Route path={`${match.url}ixp/growth`} component={asyncComponent(() => import('./ixp/growth'))}/>
       <Route path={`${match.url}ixp/overview`} component={asyncComponent(() => import('./ixp/overview'))}/>
        {/* Country routes */}

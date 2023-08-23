@@ -93,7 +93,7 @@ const MainApp = () => {
         <Content className={`gx-layout-content ${getContainerClass(navStyle)} `}>
           <App match={match}/>
           <Footer>
-            <div className="gx-layout-footer-content">
+            <div className="gx-layout-footer-content" style={{ textAlign: 'center'}}>
               {footerText}
             </div>
           </Footer>

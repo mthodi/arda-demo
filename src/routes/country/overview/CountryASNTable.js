@@ -13,8 +13,8 @@ const DataTable = ({ data }) => {
 
   const expandedRowRender = record => {
     // check if ix_presence is empty
-    var localIXPresence = "";
-    var ixPresenceText = "";
+    // var localIXPresence = "";
+    // var ixPresenceText = "";
     if (record.ix_presence.length === 0 && record.external_ix_presence_count === 0) {
         return <p>{record.as_name} is not present at any IXPs in Africa.</p>;
     }else if (record.ix_presence.length === 0 && record.external_ix_presence_count !== 0) {

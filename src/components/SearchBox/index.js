@@ -114,6 +114,11 @@ const SearchBox = ({ styleName, placeholder, onChange, value }) => {
     return <div>Loading...</div>;
   }
 
+  //do not show select component if view is empty
+  if (view !== 'IXP' && view !== 'Country' && view !== 'Region') {
+    return <div></div>;
+  }
+
 
   return (
 

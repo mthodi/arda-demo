@@ -17,14 +17,29 @@ export const CapacityGrowthBarChart = ({ data }) => {
                     dataLabels: {
                         position: 'top'
                     },
+                    colors: {
+                        // use a single color - dark orange for capacity growth
+                        ranges: [{
+                            from: 0,
+                            to: 1000000000000,
+                            color: '#FA8C15'
+                        }]
+
+                    }
                 }
             },
             dataLabels: {
                 enabled: true,
                 offsetY: -20,
+                formatter: function (val) {
+                    if (val > 1000) {
+                        return (val / 1000).toFixed(1) + "T";
+                    }
+                    return val + "G";
+                },
                 style: {
                     fontSize: '12px',
-                    colors: ['#304758']
+                    colors: ['#304758'],
                 }
             },
             
@@ -62,18 +77,27 @@ export const CapacityGrowthBarChart = ({ data }) => {
                     show: false,
                 },
                 labels: {
-                    show: false,
+                    show: true,
+                    formatter: function (val) {
+                        if (val > 1000) {
+                            return (val / 1000).toFixed(1) + " Tbps";
+                        }
+                        return val + " Gbps";
+                    }
                 }
             },
-            title: {
-                text: 'Capacity Growth',
-                floating: false,
-                offsetY: 0,
-                align: 'center',
-                style: {
-                    color: '#444'
-                }
-            }
+            // title: {
+            //     text: 'Capacity Growth',
+            //     floating: false,
+            //     offsetY: 0,
+            //     align: 'center',
+            //     style: {
+            //         color: '#444',
+            //         fontSize: '16px',
+            //         FontFace: 'gaxon',
+            //         className: 'gx-text-black gx-font-weight-bold',
+            //     }
+            // }
         }
     };
 
@@ -99,6 +123,14 @@ export const MemberGrowthBarChart = ({ data }) => {
                     horizontal: false,
                     dataLabels: {
                         position: 'top'
+                    },
+                    colors: {
+                        // use a single color - dark blue
+                        ranges: [{
+                            from: 0,
+                            to: 1000000000000,
+                            color: '#003366'
+                        }]
                     },
                 }
             },
@@ -145,18 +177,18 @@ export const MemberGrowthBarChart = ({ data }) => {
                     show: false,
                 },
                 labels: {
-                    show: false,
+                    show: true,
                 }
             },
-            title: {
-                text: 'Membership Growth',
-                floating: false,
-                offsetY: 0,
-                align: 'center',
-                style: {
-                    color: '#444'
-                }
-            }
+            // title: {
+            //     text: 'Membership Growth',
+            //     floating: false,
+            //     offsetY: 0,
+            //     align: 'center',
+            //     style: {
+            //         color: '#444'
+            //     }
+            // }
         }
     };
     return <ReactApexChart options={chartData.options} series={chartData.series} type="bar" height="350" />;

@@ -52,6 +52,12 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
             theme={themeType === THEME_TYPE_LITE ? 'lite' : 'dark'}
             mode="inline">
 
+            <Menu.Item key="home">
+              <Link to="/home"><i className="icon icon-home" />
+                <span><IntlMessages id="Home" /></span>
+              </Link>
+            </Menu.Item>
+
             <MenuItemGroup key="main" className="gx-menu-group" title={<IntlMessages id="sidebar.dashboard" />}>
 
               <SubMenu key="ixp" popupClassName={getNavStyleSubMenuClass(navStyle)}
@@ -60,60 +66,56 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Menu.Item key="ixp/overview">
                   <Link to="/ixp/overview">
                     <i className="icon icon-crypto" />
-                      <span>Overview</span>
-                    </Link>
+                    <span>Overview</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="ixp/growth">
                   <Link to="/ixp/growth">
                     <i className="icon icon-crm" />
-                      <span>Growth</span>
-                    </Link>
+                    <span>Growth</span>
+                  </Link>
                 </Menu.Item>
               </SubMenu>
 
               <SubMenu key="country" popupClassName={getNavStyleSubMenuClass(navStyle)}
-              title={<span><i className="icon icon-dasbhoard" />
-                <span>Country</span></span>}>
+                title={<span><i className="icon icon-dasbhoard" />
+                  <span>Country</span></span>}>
 
                 <Menu.Item key="country/overview">
                   <Link to="/country/overview">
                     <i className="icon icon-crypto" />
-                      <span>Overview</span>
-                    </Link>
+                    <span>Overview</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="country/asn-relations">
                   <Link to="/country/asn-relations">
                     <i className="icon icon-crm" />
-                      <span>AS Relations</span>
-                    </Link>
+                    <span>AS Relations</span>
+                  </Link>
                 </Menu.Item>
               </SubMenu>
 
               <SubMenu key="region" popupClassName={getNavStyleSubMenuClass(navStyle)}
-              title={<span><i className="icon icon-dasbhoard" />
-                <span>Region View</span></span>}>
+                title={<span><i className="icon icon-dasbhoard" />
+                  <span>Region View</span></span>}>
 
                 <Menu.Item key="region/overview">
                   <Link to="/region/overview">
                     <i className="icon icon-crypto" />
-                      <span>Overview</span>
-                    </Link>
+                    <span>Overview</span>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="region/asn-relations">
                   <Link to="/region/asn-relations">
                     <i className="icon icon-crm" />
-                      <span>AS Relations</span>
-                    </Link>
+                    <span>AS Relations</span>
+                  </Link>
                 </Menu.Item>
               </SubMenu>
 
             </MenuItemGroup>
 
-            <Menu.Item key="sample">
-              <Link to="/sample"><i className="icon icon-widgets" />
-                <span><IntlMessages id="sidebar.samplePage" /></span>
-              </Link>
-            </Menu.Item>
+
 
           </Menu>
         </CustomScrollbars>

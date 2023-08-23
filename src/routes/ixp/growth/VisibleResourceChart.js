@@ -7,25 +7,29 @@ export const ASNTrendChart = ({ data, title }) => {
       type: 'area',
       height: 350,
     },
+    colors: ['#003366'],
     noData: {
-      text: "No Data",
+      text: "No Data Found",
       align: 'center',
       verticalAlign: 'middle',
       offsetX: 0,
       offsetY: 0,
       style: {
-        color: undefined,
-        fontSize: '14px',
-        fontFamily: 'mono'
+        color: '#FFF',
+        fontSize: '16px',
+        fontFamily: 'Sans-Serif'
       }
     },
     xaxis: {
+      title: {
+        text: 'Reporting Date',
+      },
       type: 'datetime',
       categories: data.map(item => item.reporting_date),
     },
     yaxis: {
       title: {
-        text: 'Count',
+        text: 'Visible ASNs',
       },
     },
     dataLabels: {
@@ -51,8 +55,8 @@ export const ASNTrendChart = ({ data, title }) => {
 
   const series = [
     {
-      name: 'Count',
-      data: data.map(item => item.count),
+      name: 'Visible ASNs',
+      data: data.map(item => item.visible_asns),
     },
   ];
 
@@ -67,13 +71,33 @@ export const IPv4TrendChart = ({ data, title }) => {
       type: 'area',
       height: 350,
     },
+    colors: ['#FA8C15'],
+    noData: {
+      text: "No Data Found",
+      align: 'center',
+      verticalAlign: 'middle',
+      offsetX: 0,
+      offsetY: 0,
+      style: {
+        color: '#FFF',
+        fontSize: '16px',
+        fontFamily: 'Sans-Serif'
+      }
+    },
     xaxis: {
+      title: {
+        text: 'Reporting Date',
+        style: {
+          FontFace: 'Roboto',
+          fontWeight: 200,
+        },
+      },
       type: 'datetime',
       categories: data.map(item => item.reporting_date),
     },
     yaxis: {
       title: {
-        text: 'Count',
+        text: 'Visible Prefixes'
       },
     },
     dataLabels: {
@@ -87,7 +111,7 @@ export const IPv4TrendChart = ({ data, title }) => {
       gradient: {
         shadeIntensity: 1,
         opacityFrom: 0.7,
-        opacityTo: 0.3,
+        opacityTo: 0.5,
       },
     },
     tooltip: {
@@ -100,7 +124,7 @@ export const IPv4TrendChart = ({ data, title }) => {
   const series = [
     {
       name: 'Visible Prefixes',
-      data: data.map(item => item.count),
+      data: data.map(item => item.visible_prefixes),
     },
   ];
 

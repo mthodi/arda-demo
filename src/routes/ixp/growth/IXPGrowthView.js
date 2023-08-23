@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Col, Row } from "antd";
+import { Col, Row, Divider } from "antd";
 import { Typography } from 'antd';
 import { CapacityGrowthBarChart, MemberGrowthBarChart } from "./GrowthBarChart";
 import { ASNTrendChart, IPv4TrendChart } from "./VisibleResourceChart";
@@ -34,10 +34,29 @@ export default function IXPGrowthView({ ixpId }) {
                         Growth at {ixpQuery.data.name}
                     </Title>
                 </Col>
+                <Col span={24}>
+                    <Divider />
+                </Col>
+            </Row>
+            <Row>
+                <Col span={12} style={{ textAlign: 'center', marginTop: 10 }}>
+                    <Title level={5} style={{ textAlign: 'center', marginBottom: 10 }}>Yearly Membership Growth</Title>
+                </Col>
+                <Col span={12} style={{ textAlign: 'center', marginTop: 10 }}>
+                    <Title level={5} style={{ textAlign: 'center', marginBottom: 10 }}>Yearly Capacity Growth </Title>
+                </Col>
             </Row>
             <Row>
                 <Col span={12}><MemberGrowthBarChart data={ixpGrowthData.members} /></Col>
                 <Col span={12}><CapacityGrowthBarChart data={ixpGrowthData.capacity} /></Col>
+            </Row>
+            <Row>
+                <Col span={12} style={{ textAlign: 'center', marginTop: 10 }}>
+                    <Title level={5} style={{ textAlign: 'center', marginBottom: 10 }}>Count of Visible AS Numbers</Title>
+                </Col>
+                <Col span={12} style={{ textAlign: 'center', marginTop: 10 }}>
+                    <Title level={5} style={{ textAlign: 'center', marginBottom: 10 }}>Count of Visible IPv4 Prefixes</Title>
+                </Col>
             </Row>
             <Row>
                 <Col span={12}><ASNTrendChart data={visibleASNs.as_numbers} /></Col>
