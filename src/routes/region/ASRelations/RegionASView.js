@@ -7,7 +7,7 @@ import { getRegion } from 'util/Api';
 // project components
 import ASHeatmap from "components/dash/ASHeatmap";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function RegionASView ({ regionId }){
 

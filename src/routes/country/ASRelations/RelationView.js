@@ -7,7 +7,7 @@ import { getCountry } from 'util/Api';
 // project components
 import ASHeatmap from "components/dash/ASHeatmap";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function CountryRelationsView ({ countryId }){
   const countryQuery = useQuery({
